@@ -4,6 +4,8 @@
 
 When using an existing presentation as a template:
 
+For a new deck based on a template, prepare and validate `outline.json` with the [outline workflow](outline-workflow.md) first. Use its slide IDs and order for the mapping below. Save the chosen source template pages in the corresponding layout requirements.
+
 1. **Copy and analyze**:
    ```bash
    cp /path/to/user-provided.pptx template.pptx

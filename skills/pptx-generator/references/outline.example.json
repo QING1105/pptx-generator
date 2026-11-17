@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "revision": 1,
+  "presentation": {
+    "title": "示例课题汇报",
+    "occasion": "组会",
+    "audience": "课题组",
+    "language": "中文",
+    "duration_minutes": 12,
+    "style_code": "S1",
+    "template_file": null,
+    "layout_requirements": ["使用 16:9 宽屏。"]
+  },
+  "sections": [
+    {
+      "id": "opening",
+      "title": "开场",
+      "show_in_toc": false,
+      "layout_requirements": [],
+      "slides": [
+        {
+          "id": "cover",
+          "type": "cover",
+          "title": "示例课题汇报",
+          "key_message": "",
+          "content": [],
+          "sources": [],
+          "visuals": [],
+          "layout": {
+            "code": "L1",
+            "requirements": []
+          },
+          "speaker_notes": ["用一句话交代今天要讨论的研究问题。"]
+        },
+        {
+          "id": "toc",
+          "type": "toc",
+          "title": "目录",
+          "key_message": "",
+          "content": [],
+          "sources": [],
+          "visuals": [],
+          "layout": {
+            "code": "L2",
+            "requirements": []
+          },
+          "speaker_notes": []
+        }
+      ]
+    },
+    {
+      "id": "background",
+      "title": "研究背景",
+      "show_in_toc": true,
+      "layout_requirements": ["这一章每页只讲一个问题。"],
+      "slides": [
+        {
+          "id": "research-question",
+          "type": "content",
+          "title": "要回答的研究问题",
+          "key_message": "明确研究对象和要比较的两种条件。",
+          "content": ["研究对象", "比较条件", "主要观察指标"],
+          "sources": ["示例占位，替换为材料名称和页码"],
+          "visuals": [],
+          "layout": {
+            "code": "L3",
+            "requirements": ["研究问题置顶。"]
+          },
+          "speaker_notes": ["先解释为什么提出这个问题。", "接着介绍如何做这项比较。"]
+        }
+      ]
+    },
+    {
+      "id": "methods",
+      "title": "研究方法",
+      "show_in_toc": true,
+      "layout_requirements": ["图表标注步骤和数据来源。"],
+      "slides": [
+        {
+          "id": "study-design",
+          "type": "content",
+          "title": "研究设计与分析流程",
+          "key_message": "说明数据如何从采集进入分析。",
+          "content": ["数据采集", "质量检查", "比较分析"],
+          "sources": ["示例占位，替换为方法材料"],
+          "visuals": [
+            {
+              "file": null,
+              "source": "根据已确认的研究步骤绘制",
+              "caption": "研究流程图"
+            }
+          ],
+          "layout": {
+            "code": "L12",
+            "requirements": ["流程图从左到右排列。"]
+          },
+          "speaker_notes": ["重点讲清质量检查如何影响后续比较。"]
+        }
+      ]
+    }
+  ]
+}
