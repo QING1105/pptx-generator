@@ -1,0 +1,10 @@
+{
+  "name": "pptx-generator-runtime",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PptxGenJS runtime for the PPTX Generator Codex skill",
+  "type": "commonjs",
+  "dependencies": {
+    "pptxgenjs": "4.0.1"
+  }
+}

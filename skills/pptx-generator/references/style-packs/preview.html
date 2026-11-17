@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PPT 风格与单页版式预览</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#1a1a1a; color:#e0e0e0; font:14px/1.6 system-ui; padding:24px; }
+  h1 { font-size:20px; font-weight:600; margin-bottom:4px; }
+
+  .section { margin-bottom:32px; }
+  .section h2 { font-size:16px; color:#aaa; margin-bottom:12px; border-bottom:1px solid #333; padding-bottom:6px; }
+  .section h2 span { color:#888; font-weight:400; font-size:13px; margin-left:8px; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap:14px; }
+
+  .card { border-radius:6px; overflow:hidden; border:1px solid #333; background:#111; }
+  .card-select { height:180px; position:relative; overflow:hidden; }
+
+  /* ---- SWISS sample slides ---- */
+  .swiss-slide { width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; padding:28px 32px; font-family:Arial,Helvetica,sans-serif; }
+  .swiss-slide .kicker { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .swiss-slide .hairline { width:80px; height:1px; margin-bottom:18px; }
+  .swiss-slide .title { font-size:32px; line-height:1.1; font-weight:400; }
+  .swiss-slide .subtitle { font-size:13px; margin-top:10px; opacity:0.8; }
+
+  /* ---- MAGAZINE sample slides ---- */
+  .mag-slide { width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; padding:30px 34px; font-family:Georgia,serif; }
+  .mag-slide .kicker { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; font-family:Calibri,sans-serif; }
+  .mag-slide .hairline { width:70px; height:1px; margin-bottom:22px; }
+  .mag-slide .title { font-size:34px; line-height:1.15; font-weight:400; }
+  .mag-slide .subtitle { font-size:15px; margin-top:12px; font-style:italic; font-family:Calibri,sans-serif; }
+
+  /* ---- OFFICE swatch cards ---- */
+  .office-grid { grid-template-columns:repeat(auto-fill, minmax(170px,1fr)); }
+
+  .card-info { padding:10px 12px 12px; }
+  .card-code { font:11px monospace; color:#6af; margin-bottom:2px; }
+  .card-name { font-weight:600; font-size:14px; }
+  .card-meta { font-size:11px; color:#888; margin-top:2px; }
+  .pills { display:flex; gap:4px; margin-top:6px; flex-wrap:wrap; }
+  .pill { width:14px; height:14px; border-radius:3px; border:1px solid rgba(255,255,255,.12); }
+
+  /* ---- Office section note ---- */
+  .note { font-size:12px; color:#666; margin-bottom:10px; font-style:italic; }
+
+  .preview-nav { display:flex; flex-wrap:wrap; gap:8px 16px; margin:12px 0 24px; }
+  .preview-nav a { color:#a9cbff; }
+  .preview-nav a:focus-visible { outline:2px solid #a9cbff; outline-offset:3px; }
+  .layout-legend { color:#b8b8b8; margin-bottom:14px; }
+  .layout-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr)); gap:14px; }
+  .layout-grid .card { background:#fff; color:#283346; }
+  .layout-grid .card-header { padding:10px 12px; display:flex; align-items:center; gap:12px; background:#f8fafc; border-bottom:1px solid #e2e8f0; }
+  .layout-grid .card-id { font-weight:700; color:#2455bb; }
+  .layout-grid .card-body { padding:10px 12px; }
+  .layout-grid .preview { width:100%; aspect-ratio:16/9; border:1px solid #dbe2ea; border-radius:4px; position:relative; overflow:hidden; }
+  .layout-grid .zone { position:absolute; border:1px dashed #bac5d3; display:flex; align-items:center; justify-content:center; text-align:center; font-size:10px; line-height:1.05; color:#526075; background:rgba(241,245,249,.6); }
+  .layout-grid .zone.dark { background:rgba(37,99,235,.12); border-color:rgba(37,99,235,.4); color:#2455bb; }
+  .layout-grid .zone.accent { background:rgba(245,158,11,.1); border-color:rgba(245,158,11,.4); color:#9c4708; }
+  .layout-grid .zone.pic { background:rgba(248,250,252,.6); border-style:solid; }
+  .layout-grid .card-scene { margin-top:8px; font-size:12px; color:#526075; }
+  @media (max-width:540px) {
+    body { padding:16px; }
+    .section h2 span { display:block; margin-left:0; }
+  }
+</style>
+</head>
+<body>
+
+<h1>PPT 风格与单页版式预览</h1>
+<nav class="preview-nav" aria-label="预览导航">
+  <a href="#templates">单页版式 L1–L16</a>
+  <a href="#styles">风格色卡</a>
+</nav>
+
+<section class="section" id="templates" aria-labelledby="layouts-title">
+  <h2 id="layouts-title">单页版式 L1–L16</h2>
+  <p class="layout-legend">蓝框标出标题等文字区，灰框标出正文或图片区，橙框标出装饰或编号区。</p>
+<div class="layout-grid">
+
+<!-- L1: 全幅封面 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L1</span><span class="card-name">全幅封面</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:6%;top:4%;width:9%;height:10%;">校徽</div>
+      <div class="zone dark" style="left:16%;top:30%;width:68%;height:22%;">大标题 36-54pt</div>
+      <div class="zone" style="left:22%;top:58%;width:56%;height:14%;">副标题 20-28pt</div>
+      <div class="zone" style="left:30%;top:78%;width:40%;height:12%;">信息行（学生/导师/日期）</div>
+      <div class="zone accent" style="left:6%;top:92%;width:88%;height:6%;">底部装饰条</div>
+    </div>
+    <div class="card-scene">封面 · 英文题名 · 结束页</div>
+  </div>
+</div>
+
+<!-- L2: 左侧目栏 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L2</span><span class="card-name">左侧目栏</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:0;top:0;width:32%;height:100%;"></div>
+      <div class="zone dark" style="left:6%;top:20%;width:20%;height:16%;">目录</div>
+      <div class="zone" style="left:42%;top:10%;width:52%;height:10%;">01 章节名</div>
+      <div class="zone" style="left:42%;top:24%;width:52%;height:10%;">02 章节名</div>
+      <div class="zone" style="left:42%;top:38%;width:52%;height:10%;">03 章节名</div>
+      <div class="zone" style="left:42%;top:52%;width:52%;height:10%;">04 章节名</div>
+      <div class="zone" style="left:42%;top:66%;width:52%;height:10%;">05 章节名</div>
+      <div class="zone" style="left:42%;top:80%;width:52%;height:10%;">06 章节名</div>
+    </div>
+    <div class="card-scene">目录</div>
+  </div>
+</div>
+
+<!-- L3: 单列文字 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L3</span><span class="card-name">单列文字</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:6%;width:30%;height:10%;">页面标题 24pt</div>
+      <div class="zone" style="left:5%;top:20%;width:90%;height:8%;">副标题/说明行 16pt</div>
+      <div class="zone accent" style="left:5%;top:18%;width:90%;height:1px;border:none;border-bottom:1px solid #f59e0b;"></div>
+      <div class="zone" style="left:8%;top:34%;width:84%;height:52%;">正文内容 / Bullet 列表<br>多段落，14-16pt<br>行间距 1.5-1.8</div>
+    </div>
+    <div class="card-scene">纯文字背景页 · 小结</div>
+  </div>
+</div>
+
+<!-- L4: 双列对比 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L4</span><span class="card-name">双列对比</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:6%;width:30%;height:10%;">标题</div>
+      <div class="zone" style="left:5%;top:20%;width:42%;height:74%;">左侧内容 / 图片<br>标题标签 + 正文 + 图</div>
+      <div class="zone" style="left:53%;top:20%;width:42%;height:74%;">右侧内容 / 图片<br>标题标签 + 正文 + 图</div>
+    </div>
+    <div class="card-scene">国内外对比 · 创新vs局限 · 两组数据对比</div>
+  </div>
+</div>
+
+<!-- L5: 全幅大图 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L5</span><span class="card-name">全幅大图</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:60%;height:8%;">标题</div>
+      <div class="zone accent" style="left:5%;top:12%;width:90%;height:1px;border:none;border-bottom:1px solid #f59e0b;"></div>
+      <div class="zone pic" style="left:5%;top:16%;width:90%;height:70%;">a  b  c  d<br>Fig. 大图区域</div>
+      <div class="zone" style="left:5%;top:90%;width:90%;height:7%;">关键结论一句话 14pt</div>
+    </div>
+    <div class="card-scene">SEM · 路线图 · 影像 · 整页大图</div>
+  </div>
+</div>
+
+<!-- L6: 四格 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L6</span><span class="card-name">四格</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:40%;height:8%;">标题</div>
+      <div class="zone pic" style="left:5%;top:16%;width:42%;height:36%;">a</div>
+      <div class="zone pic" style="left:53%;top:16%;width:42%;height:36%;">b</div>
+      <div class="zone pic" style="left:5%;top:56%;width:42%;height:36%;">c</div>
+      <div class="zone pic" style="left:53%;top:56%;width:42%;height:36%;">d</div>
+    </div>
+    <div class="card-scene">多图并列对比 · 4张图一页</div>
+  </div>
+</div>
+
+<!-- L7: 主区+侧栏 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L7</span><span class="card-name">主区+侧栏</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:65%;height:8%;">标题</div>
+      <div class="zone" style="left:5%;top:16%;width:65%;height:76%;">主区：内容/图片/流程图<br>占主体面积</div>
+      <div class="zone accent" style="left:76%;top:16%;width:19%;height:76%;">侧栏<br>结果要点<br>数据小结<br>箭头标注</div>
+    </div>
+    <div class="card-scene">实验方法+结果对照 · 数据+分析</div>
+  </div>
+</div>
+
+<!-- L8: 章节分隔 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L8</span><span class="card-name">章节分隔</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone accent" style="left:35%;top:22%;width:30%;height:12%;">编号 01</div>
+      <div class="zone dark" style="left:20%;top:42%;width:60%;height:16%;">章节标题 36pt</div>
+      <div class="zone accent" style="left:30%;top:66%;width:40%;height:2px;border:none;border-top:2px solid #f59e0b;"></div>
+      <div class="zone" style="left:30%;top:74%;width:40%;height:8%;">装饰元素</div>
+    </div>
+    <div class="card-scene">三部分之间过渡 · 章节开始</div>
+  </div>
+</div>
+
+<!-- L9: 左要点+右图 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L9</span><span class="card-name">左要点+右图</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:30%;height:8%;">小结</div>
+      <div class="zone" style="left:5%;top:16%;width:48%;height:76%;">• Bullet 1<br>• Bullet 2<br>• Bullet 3<br>• Bullet 4</div>
+      <div class="zone pic" style="left:58%;top:16%;width:37%;height:76%;">回顾图</div>
+    </div>
+    <div class="card-scene">小结页 · 要点回顾</div>
+  </div>
+</div>
+
+<!-- L10: 三列卡片 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L10</span><span class="card-name">三列卡片</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:40%;height:8%;">标题</div>
+      <div class="zone" style="left:5%;top:16%;width:28%;height:76%;">卡片1<br>子标题+要点</div>
+      <div class="zone" style="left:36%;top:16%;width:28%;height:76%;">卡片2<br>子标题+要点</div>
+      <div class="zone" style="left:67%;top:16%;width:28%;height:76%;">卡片3<br>子标题+要点</div>
+    </div>
+    <div class="card-scene">研究内容总览 · 多并列项</div>
+  </div>
+</div>
+
+<!-- L11: 中图侧文 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L11</span><span class="card-name">中图侧文</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:30%;height:8%;">标题</div>
+      <div class="zone" style="left:5%;top:18%;width:22%;height:72%;">左侧<br>文字</div>
+      <div class="zone pic" style="left:31%;top:18%;width:38%;height:72%;">中心大图</div>
+      <div class="zone" style="left:73%;top:18%;width:22%;height:72%;">右侧<br>文字</div>
+    </div>
+    <div class="card-scene">研究意义 · 材料说明 · 机制图</div>
+  </div>
+</div>
+
+<!-- L12: 流程图 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L12</span><span class="card-name">流程图</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:30%;height:8%;">标题</div>
+      <div class="zone" style="left:8%;top:22%;width:18%;height:16%;">Step 1</div>
+      <div class="zone accent" style="left:27%;top:26%;width:4%;height:8%;">→</div>
+      <div class="zone" style="left:32%;top:22%;width:18%;height:16%;">Step 2</div>
+      <div class="zone accent" style="left:51%;top:26%;width:4%;height:8%;">→</div>
+      <div class="zone" style="left:56%;top:22%;width:18%;height:16%;">Step 3</div>
+      <div class="zone accent" style="left:75%;top:26%;width:4%;height:8%;">→</div>
+      <div class="zone" style="left:20%;top:48%;width:18%;height:16%;">Step 4</div>
+      <div class="zone accent" style="left:39%;top:52%;width:4%;height:8%;">→</div>
+      <div class="zone pic" style="left:44%;top:42%;width:36%;height:32%;">流程图/示意图</div>
+      <div class="zone accent" style="left:81%;top:52%;width:4%;height:8%;">→</div>
+      <div class="zone" style="left:10%;top:74%;width:80%;height:16%;">底部总结/引用行</div>
+    </div>
+    <div class="card-scene">研究方法 · 技术路线 · 步骤分解</div>
+  </div>
+</div>
+
+<!-- L13: 上下双排 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L13</span><span class="card-name">上下双排</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:30%;height:8%;">标题</div>
+      <div class="zone" style="left:5%;top:16%;width:28%;height:28%;">卡片 1</div>
+      <div class="zone" style="left:36%;top:16%;width:28%;height:28%;">卡片 2</div>
+      <div class="zone" style="left:67%;top:16%;width:28%;height:28%;">卡片 3</div>
+      <div class="zone accent" style="left:8%;top:48%;width:84%;height:6%;">STEP 1  →  STEP 2  →  STEP 3  →  STEP 4  →  STEP 5</div>
+      <div class="zone" style="left:20%;top:58%;width:28%;height:28%;">卡片 4</div>
+      <div class="zone" style="left:52%;top:58%;width:28%;height:28%;">卡片 5</div>
+    </div>
+    <div class="card-scene">研究思路 · 多阶段流程</div>
+  </div>
+</div>
+
+<!-- L14: 甘特图 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L14</span><span class="card-name">甘特图</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:30%;height:8%;">标题</div>
+      <div class="zone" style="left:5%;top:16%;width:20%;height:8%;">任务1</div>
+      <div class="zone accent" style="left:27%;top:16%;width:28%;height:8%;">2025 1-4月</div>
+      <div class="zone" style="left:5%;top:28%;width:20%;height:8%;">任务2</div>
+      <div class="zone accent" style="left:27%;top:28%;width:42%;height:8%;">2025-2026</div>
+      <div class="zone" style="left:5%;top:40%;width:20%;height:8%;">任务3</div>
+      <div class="zone accent" style="left:56%;top:40%;width:28%;height:8%;">2026 1-4月</div>
+      <div class="zone" style="left:5%;top:52%;width:20%;height:8%;">任务4</div>
+      <div class="zone accent" style="left:56%;top:52%;width:35%;height:8%;">2026-2027</div>
+      <div class="zone" style="left:5%;top:64%;width:20%;height:8%;">任务5</div>
+      <div class="zone accent" style="left:70%;top:64%;width:20%;height:8%;">2027</div>
+      <div class="zone" style="left:5%;top:80%;width:90%;height:12%;">底部说明/里程碑标注</div>
+    </div>
+    <div class="card-scene">进度安排 · 时间规划</div>
+  </div>
+</div>
+
+<!-- L15: 列表 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L15</span><span class="card-name">列表</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:30%;height:8%;">标题</div>
+      <div class="zone" style="left:8%;top:18%;width:84%;height:12%;">[1] Author. Title. Journal, Year, IF.</div>
+      <div class="zone" style="left:8%;top:34%;width:84%;height:12%;">[2] Author. Title. Journal, Year, IF.</div>
+      <div class="zone" style="left:8%;top:50%;width:84%;height:12%;">[3] Author. Title. Journal, Year, IF.</div>
+      <div class="zone" style="left:8%;top:66%;width:84%;height:12%;">[4] Author. Title. Journal, Year, IF.</div>
+      <div class="zone" style="left:8%;top:82%;width:84%;height:10%;">[5] ...</div>
+    </div>
+    <div class="card-scene">发表文章 · 参考文献</div>
+  </div>
+</div>
+
+<!-- L16: 图文混排 -->
+<div class="card">
+  <div class="card-header"><span class="card-id">L16</span><span class="card-name">图文混排</span></div>
+  <div class="card-body">
+    <div class="preview">
+      <div class="zone dark" style="left:5%;top:4%;width:65%;height:8%;">标题</div>
+      <div class="zone pic" style="left:5%;top:16%;width:42%;height:36%;">图 a</div>
+      <div class="zone pic" style="left:5%;top:56%;width:42%;height:36%;">图 c</div>
+      <div class="zone pic" style="left:53%;top:16%;width:20%;height:74%;">图 b</div>
+      <div class="zone" style="left:78%;top:16%;width:17%;height:74%;">侧栏<br>文字<br>分析<br>结论</div>
+    </div>
+    <div class="card-scene">数据页含文字分析 · 2-3图+解说</div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section class="section" id="styles" aria-labelledby="styles-title">
+  <h2 id="styles-title">风格色卡</h2>
+
+<!-- ============= SWISS S1-S4 ============= -->
+<div class="section">
+<h2>Swiss · 瑞士国际主义<span>字体: Helvetica / Arial | 规则: 满屏锚点色 · 直角 · 无阴影 · 左对齐</span></h2>
+<div class="grid">
+
+<div class="card">
+  <div class="card-select">
+    <div class="swiss-slide" style="background:#002FA7;color:#FAFAF8;">
+      <div class="kicker">Swiss · International</div>
+      <div class="hairline" style="background:#FAFAF8;"></div>
+      <div class="title">IKB Blue</div>
+      <div class="subtitle">S1 · 通用默认 · AI · 方法论</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">S1 · IKB Blue</div><div class="card-name">克莱因蓝</div><div class="pills"><span class="pill" style="background:#0A0A0A"></span><span class="pill" style="background:#737373"></span><span class="pill" style="background:#002FA7"></span><span class="pill" style="background:#F0F0EE"></span><span class="pill" style="background:#FAFAF8"></span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-select">
+    <div class="swiss-slide" style="background:#FFD500;color:#0A0A0A;">
+      <div class="kicker">Swiss · International</div>
+      <div class="hairline" style="background:#0A0A0A;"></div>
+      <div class="title">Lemon Yellow</div>
+      <div class="subtitle">S2 · 年轻 · 零售 · 创意</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">S2 · Lemon Yellow</div><div class="card-name">柠檬黄</div><div class="pills"><span class="pill" style="background:#0A0A0A"></span><span class="pill" style="background:#737373"></span><span class="pill" style="background:#FFD500"></span><span class="pill" style="background:#F0F0EE"></span><span class="pill" style="background:#FAFAF8"></span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-select">
+    <div class="swiss-slide" style="background:#C5E803;color:#0A0A0A;">
+      <div class="kicker">Swiss · International</div>
+      <div class="hairline" style="background:#0A0A0A;"></div>
+      <div class="title">Lemon Green</div>
+      <div class="subtitle">S3 · 生态 · 可持续 · 健康</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">S3 · Green</div><div class="card-name">柠檬绿</div><div class="pills"><span class="pill" style="background:#0A0A0A"></span><span class="pill" style="background:#737373"></span><span class="pill" style="background:#C5E803"></span><span class="pill" style="background:#F0F0EE"></span><span class="pill" style="background:#FAFAF8"></span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-select">
+    <div class="swiss-slide" style="background:#FF6B35;color:#FAFAF8;">
+      <div class="kicker">Swiss · International</div>
+      <div class="hairline" style="background:#FAFAF8;"></div>
+      <div class="title">Safety Orange</div>
+      <div class="subtitle">S4 · 警示 · 工程 · 决策</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">S4 · Safety Orange</div><div class="card-name">安全橙</div><div class="pills"><span class="pill" style="background:#0A0A0A"></span><span class="pill" style="background:#737373"></span><span class="pill" style="background:#FF6B35"></span><span class="pill" style="background:#F0F0EE"></span><span class="pill" style="background:#FAFAF8"></span></div></div>
+</div>
+
+</div>
+</div>
+
+<!-- ============= MAGAZINE M1-M5 ============= -->
+<div class="section">
+<h2>Magazine · 电子杂志<span>字体: Georgia(标题) / Calibri(正文) | 规则: 双色调 · 暖纸底 · 大留白 · 衬线标题</span></h2>
+<div class="grid">
+
+<div class="card">
+  <div class="card-select">
+    <div class="mag-slide" style="background:#F1EFEA;color:#0A0A0B;">
+      <div class="kicker" style="color:#18181A;">Magazine · Editorial</div>
+      <div class="hairline" style="background:#18181A;"></div>
+      <div class="title">Ink Classic</div>
+      <div class="subtitle" style="color:#18181A;">M1 · 通用默认 · 商业发布</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">M1 · Ink</div><div class="card-name">墨水经典</div><div class="pills"><span class="pill" style="background:#0A0A0B"></span><span class="pill" style="background:#18181A"></span><span class="pill" style="background:#E8E5DE"></span><span class="pill" style="background:#F1EFEA"></span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-select">
+    <div class="mag-slide" style="background:#F1F3F5;color:#0A1F3D;">
+      <div class="kicker" style="color:#152A4A;">Magazine · Editorial</div>
+      <div class="hairline" style="background:#152A4A;"></div>
+      <div class="title">Indigo Porcelain</div>
+      <div class="subtitle" style="color:#152A4A;">M2 · 科技 · 研究 · AI</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">M2 · Indigo</div><div class="card-name">靛蓝瓷</div><div class="pills"><span class="pill" style="background:#0A1F3D"></span><span class="pill" style="background:#152A4A"></span><span class="pill" style="background:#E4E8EC"></span><span class="pill" style="background:#F1F3F5"></span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-select">
+    <div class="mag-slide" style="background:#F5F1E8;color:#1A2E1F;">
+      <div class="kicker" style="color:#253D2C;">Magazine · Editorial</div>
+      <div class="hairline" style="background:#253D2C;"></div>
+      <div class="title">Forest Ink</div>
+      <div class="subtitle" style="color:#253D2C;">M3 · 自然 · 可持续 · 文化</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">M3 · Forest</div><div class="card-name">森林墨</div><div class="pills"><span class="pill" style="background:#1A2E1F"></span><span class="pill" style="background:#253D2C"></span><span class="pill" style="background:#ECE7DA"></span><span class="pill" style="background:#F5F1E8"></span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-select">
+    <div class="mag-slide" style="background:#EEDFC7;color:#2A1E13;">
+      <div class="kicker" style="color:#3A2A1D;">Magazine · Editorial</div>
+      <div class="hairline" style="background:#3A2A1D;"></div>
+      <div class="title">Kraft Paper</div>
+      <div class="subtitle" style="color:#3A2A1D;">M4 · 怀旧 · 人文 · 文学</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">M4 · Kraft</div><div class="card-name">牛皮纸</div><div class="pills"><span class="pill" style="background:#2A1E13"></span><span class="pill" style="background:#3A2A1D"></span><span class="pill" style="background:#E0D0B6"></span><span class="pill" style="background:#EEDFC7"></span></div></div>
+</div>
+
+<div class="card">
+  <div class="card-select">
+    <div class="mag-slide" style="background:#F0E6D2;color:#1F1A14;">
+      <div class="kicker" style="color:#2D2620;">Magazine · Editorial</div>
+      <div class="hairline" style="background:#2D2620;"></div>
+      <div class="title">Dune</div>
+      <div class="subtitle" style="color:#2D2620;">M5 · 设计 · 艺术 · 品牌</div>
+    </div>
+  </div>
+  <div class="card-info"><div class="card-code">M5 · Dune</div><div class="card-name">沙丘</div><div class="pills"><span class="pill" style="background:#1F1A14"></span><span class="pill" style="background:#2D2620"></span><span class="pill" style="background:#E3D7BF"></span><span class="pill" style="background:#F0E6D2"></span></div></div>
+</div>
+
+</div>
+</div>
+
+<!-- ============= OFFICE O1-O18 ============= -->
+<div class="section">
+<h2>Office · 商务通用<span>字体: Arial / 微软雅黑 | 规则: 通用商务调色板 · 圆角卡片 · 灵活组合</span></h2>
+<p class="note">18套专业配色，以下为色板速览。Office 系列为通用调色板，无固定排版规则。</p>
+<div class="grid office-grid">
+
+<div class="card"><div class="card-info">
+<div class="card-code">O1 · Modern &amp; Wellness</div><div class="card-name">现代健康</div><div class="card-meta">医疗 · 护肤 · SPA</div>
+<div class="pills"><span class="pill" style="background:#006d77"></span><span class="pill" style="background:#83c5be"></span><span class="pill" style="background:#edf6f9"></span><span class="pill" style="background:#ffddd2"></span><span class="pill" style="background:#e29578"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O2 · Business &amp; Authority</div><div class="card-name">商务权威</div><div class="card-meta">年报 · 金融 · 企业</div>
+<div class="pills"><span class="pill" style="background:#2b2d42"></span><span class="pill" style="background:#8d99ae"></span><span class="pill" style="background:#edf2f4"></span><span class="pill" style="background:#ef233c"></span><span class="pill" style="background:#d90429"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O3 · Nature &amp; Outdoors</div><div class="card-name">自然户外</div><div class="card-meta">环保 · 农业 · 户外</div>
+<div class="pills"><span class="pill" style="background:#606c38"></span><span class="pill" style="background:#283618"></span><span class="pill" style="background:#fefae0"></span><span class="pill" style="background:#dda15e"></span><span class="pill" style="background:#bc6c25"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O4 · Vintage &amp; Academic</div><div class="card-name">复古学术</div><div class="card-meta">学术 · 历史 · 博物馆</div>
+<div class="pills"><span class="pill" style="background:#780000"></span><span class="pill" style="background:#c1121f"></span><span class="pill" style="background:#fdf0d5"></span><span class="pill" style="background:#003049"></span><span class="pill" style="background:#669bbc"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O5 · Soft &amp; Creative</div><div class="card-name">柔美创意</div><div class="card-meta">母婴 · 甜品 · 女装</div>
+<div class="pills"><span class="pill" style="background:#cdb4db"></span><span class="pill" style="background:#ffc8dd"></span><span class="pill" style="background:#ffafcc"></span><span class="pill" style="background:#bde0fe"></span><span class="pill" style="background:#a2d2ff"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O6 · Bohemian</div><div class="card-name">波西米亚</div><div class="card-meta">婚礼 · 家居 · 慢生活</div>
+<div class="pills"><span class="pill" style="background:#ccd5ae"></span><span class="pill" style="background:#e9edc9"></span><span class="pill" style="background:#fefae0"></span><span class="pill" style="background:#faedcd"></span><span class="pill" style="background:#d4a373"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O7 · Vibrant &amp; Tech</div><div class="card-name">活力科技</div><div class="card-meta">体育 · 创业 · 教育</div>
+<div class="pills"><span class="pill" style="background:#8ecae6"></span><span class="pill" style="background:#219ebc"></span><span class="pill" style="background:#023047"></span><span class="pill" style="background:#ffb703"></span><span class="pill" style="background:#fb8500"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O8 · Craft &amp; Artisan</div><div class="card-name">手作匠心</div><div class="card-meta">咖啡 · 手工艺 · 烘焙</div>
+<div class="pills"><span class="pill" style="background:#7f5539"></span><span class="pill" style="background:#a68a64"></span><span class="pill" style="background:#ede0d4"></span><span class="pill" style="background:#656d4a"></span><span class="pill" style="background:#414833"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O9 · Tech &amp; Night</div><div class="card-name">暗夜科技</div><div class="card-meta">科技发布 · 天文 · 豪车</div>
+<div class="pills"><span class="pill" style="background:#000814"></span><span class="pill" style="background:#001d3d"></span><span class="pill" style="background:#003566"></span><span class="pill" style="background:#ffc300"></span><span class="pill" style="background:#ffd60a"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O10 · Education &amp; Charts</div><div class="card-name">教育图表</div><div class="card-meta">统计 · 教育 · 市场</div>
+<div class="pills"><span class="pill" style="background:#264653"></span><span class="pill" style="background:#2a9d8f"></span><span class="pill" style="background:#e9c46a"></span><span class="pill" style="background:#f4a261"></span><span class="pill" style="background:#e76f51"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O11 · Forest &amp; Eco</div><div class="card-name">森林生态</div><div class="card-meta">景观 · ESG · 植物</div>
+<div class="pills"><span class="pill" style="background:#dad7cd"></span><span class="pill" style="background:#a3b18a"></span><span class="pill" style="background:#588157"></span><span class="pill" style="background:#3a5a40"></span><span class="pill" style="background:#344e41"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O12 · Elegant &amp; Fashion</div><div class="card-name">优雅时尚</div><div class="card-meta">时装 · 画廊 · 美妆</div>
+<div class="pills"><span class="pill" style="background:#edafb8"></span><span class="pill" style="background:#f7e1d7"></span><span class="pill" style="background:#dedbd2"></span><span class="pill" style="background:#b0c4b1"></span><span class="pill" style="background:#4a5759"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O13 · Art &amp; Food</div><div class="card-name">艺术美食</div><div class="card-meta">餐饮 · 展览 · 民族风</div>
+<div class="pills"><span class="pill" style="background:#335c67"></span><span class="pill" style="background:#fff3b0"></span><span class="pill" style="background:#e09f3e"></span><span class="pill" style="background:#9e2a2b"></span><span class="pill" style="background:#540b0e"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O14 · Luxury &amp; Mysterious</div><div class="card-name">奢华神秘</div><div class="card-meta">珠宝 · 酒店 · 高端咨询</div>
+<div class="pills"><span class="pill" style="background:#22223b"></span><span class="pill" style="background:#4a4e69"></span><span class="pill" style="background:#9a8c98"></span><span class="pill" style="background:#c9ada7"></span><span class="pill" style="background:#f2e9e4"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O15 · Pure Tech Blue</div><div class="card-name">纯技蓝调</div><div class="card-meta">云/AI · 海洋 · 医疗</div>
+<div class="pills"><span class="pill" style="background:#03045e"></span><span class="pill" style="background:#0077b6"></span><span class="pill" style="background:#00b4d8"></span><span class="pill" style="background:#90e0ef"></span><span class="pill" style="background:#caf0f8"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O16 · Coastal Coral</div><div class="card-name">海岸珊瑚</div><div class="card-meta">旅游 · 夏日 · 饮品</div>
+<div class="pills"><span class="pill" style="background:#0081a7"></span><span class="pill" style="background:#00afb9"></span><span class="pill" style="background:#fdfcdc"></span><span class="pill" style="background:#fed9b7"></span><span class="pill" style="background:#f07167"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O17 · Vibrant Orange Mint</div><div class="card-name">活力橘薄荷</div><div class="card-meta">儿童 · 促销 · 快消</div>
+<div class="pills"><span class="pill" style="background:#ff9f1c"></span><span class="pill" style="background:#ffbf69"></span><span class="pill" style="background:#ffffff"></span><span class="pill" style="background:#cbf3f0"></span><span class="pill" style="background:#2ec4b6"></span></div>
+</div></div>
+
+<div class="card"><div class="card-info">
+<div class="card-code">O18 · Platinum White Gold</div><div class="card-name">白金尊享</div><div class="card-meta">AI产品 · 金融科技 · 奢侈</div>
+<div class="pills"><span class="pill" style="background:#0a0a0a"></span><span class="pill" style="background:#0070F3"></span><span class="pill" style="background:#D4AF37"></span><span class="pill" style="background:#f5f5f5"></span><span class="pill" style="background:#ffffff"></span></div>
+</div></div>
+
+</div>
+</div>
+
+</section>
+
+</body>
+</html>
